@@ -1,21 +1,21 @@
-import numpy
+import numpy as np
 
 def read_params():
     principal = input('enter principal: ')
-    rate = input('enter rate: ')
+    rate = input('enter rate (as decimal): ')
     payment = input('enter payment: ')
-    period = input('enter period: ')
+    period = input('enter period (in months): ')
     print(principal, rate, payment, period)
     return principal, rate, payment, period
 
 def calculate_period(principal, rate, payment):
-    period = numpy.log1p(rate)*(payment/(payment-rate*principal))
+    print('in method')
+    period = np.math.log((payment/(payment-rate*principal)), 1+rate)
     print(period)
 
 def calculate_payment(principal, rate, period):
     payment = principal*(rate*numpy.power((1+rate),period)/(numpy.power((1+rate),period)-1))
     print(payment)
-
 
 
 if __name__ == "__main__":
