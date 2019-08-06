@@ -23,20 +23,17 @@ def calculate_principal(rate, payment, period):
     print('[', '%.2f' % principal, ']')
     return principal
 
-#keeping in case a calculation is found
-#def calculate_rate(principal, payment, period):
-#    rate = 1
-#    print(rate)
-#    return rate
-
 def graph_amort_table(principal, rate, payment, period):
+    total_interest = 0
     rate = rate/12
-    print('--period--+principal-+-interest-')
-    print('----------+----------+----------')
+    print('--period--+principal-+-interest-+-tot-int--')
+    print('----------+----------+----------+----------')
     while (period >= 0) and (principal > 0):
         principal, interest = calc_graph_iteration(principal, rate, payment)
-        print(int(period), ' | ', '%.2f' % principal, ' | ', '%.2f' % interest)
-        print('----------+----------+----------')
+        total_interest = total_interest + interest
+        print(int(period), ' | ', '%.2f' % principal, ' | ', '%.2f' %
+                interest,' | ', '%.2f' % total_interest)
+        print('----------+----------+----------+----------')
         period = period - 1
 
 def calc_graph_iteration(principal, rate, payment):
