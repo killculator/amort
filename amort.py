@@ -32,7 +32,6 @@ def calculate_principal(rate, payment, period):
 def graph_amort_table(principal, rate, payment, period):
     rate = rate if rate < 1 else rate/100
     total_interest = 0
-    rate = rate/12
     print('--period--+principal-+-interest-+-tot-int--')
     print('----------+----------+----------+----------')
     while (period >= 0) and (principal - payment > 0):
@@ -45,8 +44,8 @@ def graph_amort_table(principal, rate, payment, period):
 
 
 def calc_graph_iteration(principal, rate, payment):
-    principal = principal - payment
     interest = principal * rate
+    principal = principal - payment
     principal = principal + interest
     return principal, interest
 
@@ -72,5 +71,5 @@ if __name__ == "__main__":
                     "determine these, please enter in your own')
             rate = input('enter rate (as decimal): ')
 
-    graph_amort_table(float(principal), float(rate), float(payment),
+    graph_amort_table(float(principal), float(rate)/12, float(payment),
                       float(period))
