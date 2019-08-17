@@ -2,12 +2,28 @@ import numpy as np
 
 
 def read_params():
-    principal = input('enter principal: ')
-    rate = input('enter annual rate: ')
-    payment = input('enter payment: ')
-    period = input('enter period (in months): ')
+    principal = convert_param_to_float(input('enter principal: '))
+    rate = convert_param_to_float(input('enter annual rate: '))
+    payment = convert_param_to_float(input('enter payment: '))
+    period = convert_param_to_float(input('enter period (in months): '))
     print('[', principal, rate, payment, period, ']')
+    rate = format_rate(rate)
     return principal, rate, payment, period
+
+
+def convert_param_to_float(param):
+    if isinstance(param, float):
+        return param
+    elif param != '':
+        return float(param)
+    else:
+        return param
+
+
+def format_rate(rate):
+    if rate > 1.0:
+        rate = rate/100
+    return rate/12
 
 
 def calculate_period(principal, rate, payment):
@@ -30,7 +46,6 @@ def calculate_principal(rate, payment, period):
 
 
 def graph_amort_table(principal, rate, payment, period):
-    rate = rate if rate < 1 else rate/100
     total_interest = 0
     print('--period--+principal-+-interest-+-tot-int--')
     print('----------+----------+----------+----------')
@@ -71,5 +86,4 @@ if __name__ == "__main__":
                     "determine these, please enter in your own')
             rate = input('enter rate (as decimal): ')
 
-    graph_amort_table(float(principal), float(rate)/12, float(payment),
-                      float(period))
+    graph_amort_table(principal, rate, payment, period)
